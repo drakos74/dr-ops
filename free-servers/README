@@ -1,0 +1,105 @@
+(run) remote_root_setup.sh [remote ip] [hostname]               - $ bash remote_root_setup.sh 78.47.109.192 dd1.slave.eek
+(run) remote_ssh_user_setup.sh [remote ip1] [remote ip2] ...    - $ bash remote_ssh_user_setup.sh 78.47.109.192 78.47.109.191
+(run) remote_selfie_setup.sh [remote ip] [hostname]             - $ bash remote_selfie_setup.sh 78.47.109.192 dd1.slave.eek
+(run) remote_ssh_setup.sh [remote ip1] [remote ip2] ...         - $ bash remote_ssh_setup.sh 78.47.109.192 78.47.109.191
+
+setup
+/*
+* ( ) external action
+* [ ] terminal reaction
+* { } variable String
+* (O) optional
+*/
+    - change password
+        sudo passwd root
+        ------ We ve got scripts for the rest ------- look in free-servers ... -/_local -/root and -/selfie
+    - change hostname
+        /etc/hostname [change references]
+        /etc/hosts [change references]
+        /etc/init.d/hostname.sh start [exec to avoid reboot]
+	- make user
+		user add selfie
+		passwd selfie
+		self
+		sudo mkdir /home/selfie
+		[Password:*]
+		sudo mkdir /home/selfie/Downloads
+	- install java
+	    $ mkdir /opt/java && cd /opt/java [check if java is installed and make dir]
+		$ wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u45-b14/jdk-8u45-linux-x64.tar.gz"
+		[Download jdk in ../Downloads]
+		 (cd /home/selfie/Downloads)
+		$ tar -zxvf jdk-8u45-linux-x64.tar.gz [extract]
+        $ rm jdk-8u45-linux-x64.tar.gz
+		 (rpm -i jdk-{$jdk_version}-linux-x64.rpm)
+		$ cd jdk1.8.0_45/
+        $ update-alternatives --install /usr/bin/java java /opt/java/jdk1.8.0_45/bin/java 100
+        $ update-alternatives --config java
+        $ update-alternatives --install /usr/bin/javac javac /opt/java/jdk1.8.0_45/bin/javac 100
+        $ update-alternatives --config javac
+        $ update-alternatives --install /usr/bin/jar jar /opt/java/jdk1.8.0_45/bin/jar 100
+        $ update-alternatives --config jar
+        $ export JAVA_HOME=/opt/java/jdk1.8.0_45/
+        $ export JRE_HOME=/opt/java/jdk1.8.0._45/jre
+        $ export PATH=$PATH:/opt/java/jdk1.8.0_45/bin:/opt/java/jdk1.8.0_45/jre/bin
+		 (ln -s /usr/sbin/update-alternatives /usr/sbin/alternatives)
+		 (O) java -version
+		export JAVA_HOME=/usr/java/jdk{$jdk_file}
+	- passwordless ssh for selfie
+        	    $ ssh-keygen -t rsa
+        	    $ ssh {remote-username}@{remote-ip} mkdir -p .ssh
+        	    $ cat .ssh/id_rsa.pub | ssh {remote-username}@{remote-ip} 'cat >> .ssh/authorized_keys'
+        	    $ ssh {remote-username}@{remote-ip} "chmod 700 .ssh; chmod 640 .ssh/authorized_keys"
+        	    $ ssh {remote-username}@{remote-ip} [test connection]
+	- install nodejs
+	(Debian)
+		apt-get install curl
+        curl -sL https://deb.nodesource.com/setup_5.x | bash -
+        apt-get install --yes nodejs
+        apt-get install --yes build-essential
+    (OpenSuse)
+		 (zypper addrepo http://download.opensuse.org/repositories/devel:languages:nodejs/openSUSE_{$suse_version}/devel:languages:nodejs.repo
+		 (zypper refresh
+		 (zypper install nodejs
+		(O) node -v
+    - install websockets for node
+        npm install -g websocket
+	- install logging for node
+        npm install -g winston
+    - install promises for node
+        npm install -g promise --save
+    - install hbase client [REST]
+        npm install -g hbase
+	[
+	- install maven
+		(Download apache-maven-3.3.3.bin.tar.gz in downloads)
+		su -p (get sudo privileges within current users environment)
+		tar xvzf /downloads/apache-maven-3.3.3-bin.tar.gz -C /tmp/ (extract in /tmp)
+		mv /tmp/apache-maven* /opt/ (move to /opt/)
+		export PATH=$PATH:/opt/apache-maven-3.3.3/bin (add to PATH)
+	]
+	- install scala
+	(Debian)
+        $ wget http://www.scala-lang.org/downloads/distrib/files/scala-2.11.8.tgz
+        $ tar zxf scala-2.11.8.tgz
+        $ sudo mv scala-2.11.8 /usr/share/scala
+    (OpenSuse)
+		scala.zip (scala-2.11.7) -> unzip at /usr/local/
+		export SCALA_HOME=/usr/local/scala-2.11.7/bin
+		export PATH=$PATH:$SCALA_HOME
+	[
+	- install sbt
+		(Download sbt-launch.jar)
+		(move to directory)		/usr/local/bin
+		(create file) sbt
+
+			#!/bin/bash
+			SBT_OPTS="-Xms512M -Xmx1536M -Xss1M -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256M"
+			java $SBT_OPTS -jar `dirname $0`/sbt-launch.jar "$@"
+
+		(execute script)		chmod u+x usr/local/bin/sbt
+    ]
+
+// info
+hostnamectl
+

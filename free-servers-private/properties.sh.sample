@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+dr.server.1=78.48.100.001|dr.master.eek
+dr.root.user.1=root
+dr.root.password.1=
+
+dr.server.2=78.48.100.002|dr.slave.eek
+dr.root.user.1=root
+dr.root.password.1=
+
+dr.selfie.user=selfie
+dr.selfie.password=
+
+dr.jdk.version=
+
+dr.ssh.path=/home/selfie/.ssh
+dr.ssh.path.tmp=/home/selfie/.ssh/tmp
+
+dr.ssh.key=~/.ssh/id_rsa.pub
