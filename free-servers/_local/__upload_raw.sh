@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
- echo "Uploading init script "$init_sh
-  scp -rp $mirror_path""$init_sh root@$remote_host:$remote_path"init/"$init_sh
-  echo "Uploading test script "$test_sh
-  scp -rp $mirror_path""$test_sh root@$remote_host:$remote_path"init/"$test_sh
+source __upload_config.sh
+
+echo "Uploading script : "$local_file
+scp -rp $local_file $remote_user@$dr_server_1:$remote_dir

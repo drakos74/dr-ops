@@ -44,6 +44,8 @@ if [ "$host_name_ok" = 1 ]; then
     echo "Appending cluster's to $hosts_file..."
     cat $remote_path/$custom_hosts >> $hosts_file
     #fi
+  else
+    echo "Hostname is already set up correctly as $old_hostname"
 fi
 
 echo "Done _host"

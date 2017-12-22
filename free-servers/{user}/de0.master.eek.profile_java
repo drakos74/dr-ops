@@ -1,0 +1,6 @@
+export JAVA_HOME=/opt/java/jdk-9.0.1
+export JRE_HOME=/opt/java/jdk-9.0.1/jre
+export PATH=$PATH:/opt/java/jdk-9.0.1/bin:/opt/java/jdk-9.0.1/jre/bin
+export JAVA_HOME=/opt/java/jdk-9.0.1
+export JRE_HOME=/opt/java/jdk-9.0.1/jre
+export PATH=$PATH:/opt/java/jdk-9.0.1/bin:/opt/java/jdk-9.0.1/jre/bin

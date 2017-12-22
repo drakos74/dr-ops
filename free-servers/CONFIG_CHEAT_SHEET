@@ -1,0 +1,3 @@
+// Server static files in Tomcat
+// https://stackoverflow.com/questions/1812244/simplest-way-to-serve-static-data-from-outside-the-application-server-in-a-java
+<Context docBase="/path/to/files" path="/files" />

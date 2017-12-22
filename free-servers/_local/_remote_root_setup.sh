@@ -22,11 +22,16 @@ echo "Upload/Overwrite remote dirs ... "
 scp -rp $local_bin_path root@$remote_server:$remote_root_path/
 scp -rp $local_config_path root@$remote_server:$remote_root_path/
 
+echo "Creating .profile Download dir ... $user_setup_dir"
+ssh root@$remote_server mkdir $user_setup_dir
+
 # TODO : install maven
 echo "Executing remotely ... SET_HOSTNAME"
 ssh root@$remote_server 'bash -s' < $local_bin_path/$hostname_init_script $host_name
 echo "Executing remotely ... CREATE_SELFIE"
-ssh root@$remote_server 'bash -s' < $local_bin_path/$hostname_init_script $host_name
-
+ssh root@$remote_server 'bash -s' < $local_bin_path/$selfie_init_script
 echo "Executing remotely ... SET_JAVA"
+ssh root@$remote_server 'bash -s' < $local_bin_path/$java_init_script $host_name $user_setup_dir
 
+echo "Downloading user settings ... "
+scp -rp root@$remote_server:$user_setup_dir $local_public_path/
