@@ -1,7 +1,7 @@
-(run) remote_root_setup.sh [remote ip] [hostname]               - $ bash remote_root_setup.sh 78.47.109.192 dd1.slave.eek
-(run) remote_ssh_user_setup.sh [remote ip1] [remote ip2] ...    - $ bash remote_ssh_user_setup.sh 78.47.109.192 78.47.109.191
-(run) remote_selfie_setup.sh [remote ip] [hostname]             - $ bash remote_selfie_setup.sh 78.47.109.192 dd1.slave.eek
-(run) remote_ssh_setup.sh [remote ip1] [remote ip2] ...         - $ bash remote_ssh_setup.sh 78.47.109.192 78.47.109.191
+(run) remote_root_setup.sh [remote ip] [hostname]               - $ bash remote_root_setup.sh {server-i-ip} {server-i-name}
+(run) remote_ssh_user_setup.sh [remote ip1] [remote ip2] ...    - $ bash remote_ssh_user_setup.sh {server-1-ip} {server-2-ip}
+(run) remote_selfie_setup.sh [remote ip] [hostname]             - $ bash remote_selfie_setup.sh {server-i-ip} {server-i-name}
+(run) remote_ssh_setup.sh [remote ip1] [remote ip2] ...         - $ bash remote_ssh_setup.sh {server-1-ip} {server-2-ip}
 
 setup
 /*
