@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source ../../free-servers-private/config/path.properties.sh
+source __path.properties.sh
 source ../../free-servers-private/config/script.properties.sh
 
 remote_server=$1

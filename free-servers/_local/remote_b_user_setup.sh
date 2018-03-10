@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-# relative path ... but in general better to specify full path
-source ../../free-servers-private/config/config.properties.sh
+source __config.properties.sh
 
 echo "TODO:Please check if already initilized for every component..."
 
